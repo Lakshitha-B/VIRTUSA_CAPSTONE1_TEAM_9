@@ -1,31 +1,9 @@
-const readline = require("readline");
+// Get input via browser popup
+const userInput = prompt("Enter words separated by spaces:");
 
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
+if (userInput) {
+    const words = userInput.split(" ");
+    const groups = Object.groupBy(words, (word) => word[0].toLowerCase());
 
-rl.question("Enter words separated by spaces: ", (input) => {
-
-    const words = input.split(" ");
-    const groups = new Map();
-
-    for (let word of words) {
-        const firstChar = word[0].toLowerCase();
-
-        if (!groups.has(firstChar)) {
-            groups.set(firstChar, []);
-        }
-
-        groups.get(firstChar).push(word);
-    }
-
-    console.log("\nGrouped words:");
-
-    for (let [key, value] of groups) {
-        console.log(key + " -> " + value.join(", "));
-    }
-
-    rl.close();
-});
-
+    console.log("Grouped words:", groups);
+}
