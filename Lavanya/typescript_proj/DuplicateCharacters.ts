@@ -2,7 +2,7 @@ function findDuplicateCharacters(input: string): string[] {
     const characterFrequency = new Map<string, number>();
     const duplicateCharacters: string[] = [];
 
-    // Count the frequency of each character.
+    
     for (const character of input) {
         if (character === " ") {
             continue;
@@ -17,7 +17,6 @@ function findDuplicateCharacters(input: string): string[] {
         );
     }
 
-    // Find characters that occur more than once.
     for (const [character, frequency] of characterFrequency) {
         if (frequency > 1) {
             duplicateCharacters.push(character);

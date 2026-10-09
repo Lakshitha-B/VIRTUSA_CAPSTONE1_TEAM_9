@@ -1,64 +1,33 @@
-async function fetchApiData(
-    apiUrl: string,
-    apiNumber: number
-): Promise<void> {
-    try {
-        const response = await fetch(apiUrl);
-
-        if (!response.ok) {
-            throw new Error(
-                `HTTP ${response.status}: ${response.statusText}`
-            );
-        }
-
-        const responseData: unknown = await response.json();
-
-        console.log(`\nAPI ${apiNumber} Response:`);
-        console.log(responseData);
-    } catch (error) {
-        console.error(
-            `\nAPI ${apiNumber} failed:`,
-            error instanceof Error ? error.message : error
-        );
-    }
-}
-
-async function executeApiCalls(apiUrls: string[]): Promise<void> {
-    const startTime = Date.now();
-
-    // Promise.all() executes the independent API requests concurrently.
-    await Promise.all(
-        apiUrls.map((apiUrl, index) =>
-            fetchApiData(apiUrl, index + 1)
-        )
-    );
-
-    const executionTime = Date.now() - startTime;
-
-    console.log(`\nTotal execution time: ${executionTime} ms`);
-}
-
-function getApiUrls(): string[] {
-    const commandLineArguments = process.argv.slice(2);
-
-    if (commandLineArguments.length !== 3) {
-        throw new Error(
-            "Please provide exactly three API URLs."
-        );
-    }
-
-    return commandLineArguments;
-}
-
 async function main(): Promise<void> {
-    try {
-        const apiUrls = getApiUrls();
+    const apiUrls = process.argv.slice(2);
 
-        await executeApiCalls(apiUrls);
-    } catch (error) {
-        console.error(
-            error instanceof Error ? error.message : error
+    if (apiUrls.length !== 3) {
+        console.log("Please enter exactly 3 API URLs.");
+        return;
+    }
+
+    try {
+        const responses = await Promise.all(
+            apiUrls.map(url => fetch(url))
         );
+
+        for (let i = 0; i < responses.length; i++) {
+            const response = responses[i];
+
+            if (!response) {
+                continue;
+            }
+
+            if (!response.ok) {
+                console.log(`API ${i + 1} failed: ${response.status}`);
+                continue;
+            }
+
+            const data = await response.json();
+            console.log(`API ${i + 1} Response:`, data);
+        }
+    } catch (error) {
+        console.log("An error occurred:", error);
     }
 }
 

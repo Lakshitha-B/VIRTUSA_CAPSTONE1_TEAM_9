@@ -3,7 +3,7 @@ const readline = require("readline");
 function moveZerosToEnd(numbers) {
     let nonZeroIndex = 0;
 
-    // Move all non-zero elements to the beginning.
+    
     for (let currentIndex = 0; currentIndex < numbers.length; currentIndex++) {
         if (numbers[currentIndex] !== 0) {
             numbers[nonZeroIndex] = numbers[currentIndex];
@@ -11,7 +11,7 @@ function moveZerosToEnd(numbers) {
         }
     }
 
-    // Fill the remaining positions with zeros.
+   
     while (nonZeroIndex < numbers.length) {
         numbers[nonZeroIndex] = 0;
         nonZeroIndex++;

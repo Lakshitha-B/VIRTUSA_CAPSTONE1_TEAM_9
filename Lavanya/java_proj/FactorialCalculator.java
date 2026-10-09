@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class FactorialCalculator {
 
-    // Calculates factorial using recursion
+   
     public static long factorialRecursive(int number) {
         if (number == 0 || number == 1) {
             return 1;
@@ -11,7 +11,7 @@ public class FactorialCalculator {
         return number * factorialRecursive(number - 1);
     }
 
-    // Calculates factorial using iteration
+   
     public static long factorialIterative(int number) {
         long factorial = 1;
 
@@ -42,4 +42,4 @@ public class FactorialCalculator {
 
         scanner.close();
     }
-}x
+}
