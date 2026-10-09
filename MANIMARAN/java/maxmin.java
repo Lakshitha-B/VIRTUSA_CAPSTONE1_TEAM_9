@@ -1,5 +1,5 @@
 import java.util.*;
-class task1{
+class maxmin{
     public static void main(String[] args){
         Scanner sc=new Scanner(System.in);
         int len=sc.nextInt();
