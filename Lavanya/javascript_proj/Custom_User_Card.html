@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom User Card</title>
+</head>
+
+<body>
+
+    <h1>User Profiles</h1>
+
+    <user-card
+        name="Lavanya"
+        role="Software Developer">
+    </user-card>
+
+    <user-card
+        name="Rahul"
+        role="Backend Developer">
+    </user-card>
+
+    <script>
+        class UserCard extends HTMLElement {
+
+            constructor() {
+                super();
+
+                // Create a Shadow DOM for the component.
+                this.attachShadow({ mode: "open" });
+            }
+
+            connectedCallback() {
+                const name = this.getAttribute("name") || "Unknown";
+                const role = this.getAttribute("role") || "Not specified";
+
+                this.shadowRoot.innerHTML = `
+                    <style>
+                        .card {
+                            width: 300px;
+                            padding: 20px;
+                            margin: 15px 0;
+                            border: 1px solid #ccc;
+                            border-radius: 8px;
+                            font-family: Arial, sans-serif;
+                        }
+
+                        .name {
+                            font-size: 20px;
+                            font-weight: bold;
+                        }
+
+                        .role {
+                            margin-top: 8px;
+                        }
+                    </style>
+
+                    <div class="card">
+                        <div class="name">${name}</div>
+                        <div class="role">Role: ${role}</div>
+                    </div>
+                `;
+            }
+        }
+
+        // Register the custom HTML element.
+        customElements.define("user-card", UserCard);
+    </script>
+
+</body>
+</html>
