@@ -1,19 +1,18 @@
 import java.util.*;
-class task3 {
-    public static void main(String args[]){
-        Scanner sc=new Scanner (System.in);
+public class task2 {
+
+static int sum(int n){
+    if(n==0){
+        return 0;
+    }
+    return (n%10) +sum(n/10);
+}
+ public static void main(String args[]){
+        Scanner sc=new Scanner(System.in);
         int n=sc.nextInt();
-        int arr[]=new int[n];
-        for(int i=0;i<n;i++){
-            arr[i]=sc.nextInt();
-        }
-        
-        Set <Integer> set=new LinkedHashSet<>();
-        for(int a:arr){
-            set.add(a);
-        }
-        System.out.print(set);
+        System.out.print("Sum of digits"+" "+sum(n));
         sc.close();
     }
+
     
 }
