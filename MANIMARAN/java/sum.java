@@ -1,5 +1,5 @@
 import java.util.*;
-public class task2 {
+public class sum {
 
 static int sum(int n){
     if(n==0){
